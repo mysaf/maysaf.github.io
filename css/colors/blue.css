@@ -10,6 +10,7 @@
 @keyframes preloader {
   25% {
     height: 30px;
+    -webkit-transform: translateY(15px);
     transform: translateY(15px);
     background: #28ABE3;
   }
