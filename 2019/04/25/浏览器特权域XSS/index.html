@@ -8,12 +8,12 @@
   
   
   
-  <title>北极边界安全团队 | 聚网络文明之风，传文明网络之行！</title>
+  <title>浏览器特权域XSS漏洞 | 北极边界安全团队 | 聚网络文明之风，传文明网络之行！</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="北极边界,安全团队,Arcticshell,Arctic shell">
+    <meta name="keywords" content="浏览器安全,官方,">
   
   
   
@@ -159,143 +159,197 @@
 </script>
 
       
-<div class="container home-index">
+
+
+
+
+
+
+
+
+<div class="container post-index">
+
   
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2019/04/24/关于团队/">
-        <span>关于团队 · 亲~ 请务必进入阅读！</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
-      <span>
-        发布时间 : 2019-04-24
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2019-04-24
-      </span>
-      
-        <span>
-        分类 :
-          <a href="/categories/官方声明/">
-            官方声明
-          </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="关于团队"></span>
-        </span>
-      
-    </div>
+
+<div class="post">
+  <h1 class="article-title">
+    <span>浏览器特权域XSS漏洞</span>
+  </h1>
+  <div class="article-top-meta">
+    <span>
+      发布 : 
+      2019-04-25
+    </span>
     
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        <p>免责声明：本博客所有 【文章/教程】 以及各类 【软件/工具】 ，仅供研究测试及学习技术之用，严禁传播和用于非法用途！<br>
-      </p></div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/官方声明/">
-              官方声明
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/官方/">
-                  #官方
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
-    </div>
-  </div>
-  
-  <div class="post">
-    <h1 class="article-title">
-      <a href="/2019/04/25/浏览器特权域XSS/">
-        <span>浏览器特权域XSS漏洞</span>
-      </a>
-    </h1>
-    <!-- PC端文章信息 -->
-    <div class="article-top-meta pc-view">
       <span>
-        发布时间 : 2019-04-25
-      </span>
-    </div>
-    <!-- 移动端文章信息 -->
-    <div class="article-top-meta mobile-view">
-      <span>
-        发布 : 2019-04-25
-      </span>
-      
-        <span>
-        分类 :
+        分类 : 
           <a href="/categories/浏览器安全/">
             浏览器安全
           </a>
-        </span>
-      
-      
-        <span>
-          浏览 : <span class="article-timer" data-identity="浏览器特权域XSS"></span>
-        </span>
-      
-    </div>
+      </span>
     
-    <!-- 文章简介 -->
-    <div class="article-content">
-      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
-        <p>导语：科普什么是浏览器特权域XSS，可以用来干什么？<br>
-      </p></div>
-    </div>
-    <div class="article-footer">
-      <div class="article-meta pull-left">
-        <!-- 分类pc端可见 -->
-        <span class="pc-view">
-          
-            <i class="iconfont icon-tag"></i>分类:
-            <a href="/categories/浏览器安全/">
-              浏览器安全
-            </a>
-          </span>
-          
-        <span>
-          
-            <i class="iconfont icon-06tags"></i>标签:
-            
-              <span class="span--tag">
-                <a href="/tags/官方/">
-                  #官方
-                </a>
-              </span>
-            
-                    
-        </span>
-      </div>
+  </div>
+
+  
+
+  <div class="article-content">
+    <div class="markdown-body">
+      <p></p>
+<blockquote>
+<p>作者：天析<br>团队：Arctic Shell</p>
+</blockquote>
+<h2 id="为什么科普这个？"><a href="#为什么科普这个？" class="headerlink" title="为什么科普这个？"></a>为什么科普这个？</h2><p>今天在群里看到有表姐说这个，然后恰好又有学姐在问什么是特权域XSS，于是就来说说这个 “特权域” 吧~</p>
+<h2 id="漏洞定位"><a href="#漏洞定位" class="headerlink" title="漏洞定位"></a>漏洞定位</h2><blockquote>
+<p>漏洞等级定位：高危 （远程代码执行）<br>最早案例定位：2013年<br>主要类型：浏览器安全</p>
+</blockquote>
+<h2 id="案例寻找"><a href="#案例寻找" class="headerlink" title="案例寻找"></a>案例寻找</h2><blockquote>
+<p>百度浏览器远程命令执行<br>乌云镜像站：<a href="https://shuimugan.com/bug/view?bug_no=80158" target="_blank" rel="noopener">https://shuimugan.com/bug/view?bug_no=80158</a></p>
+</blockquote>
+<h2 id="什么是特权域？"><a href="#什么是特权域？" class="headerlink" title="什么是特权域？"></a>什么是特权域？</h2><p>特权域是为了需要调用一些其他的功能而去开发的，比如去获取一些API之类的，而又因为这些特权是只能在某个特定的域下才能操作的</p>
+<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h3><p>就拿我用的谷歌浏览器来说吧~</p>
+<blockquote>
+<p>特权域：chrome://downloads</p>
+</blockquote>
+<h2 id="特权域的作用"><a href="#特权域的作用" class="headerlink" title="特权域的作用"></a>特权域的作用</h2><p>一般我们寻找特权域，最终的作用，是为了命令执行，所以这将会是一个系列的套路，可以总结为这样4步：</p>
+<blockquote>
+<p>1.确定特权域<br>2.特权域的XSS<br>3.调用API<br>4.编写EXP</p>
+</blockquote>
+<p>对于特权域的寻找我们得还需要关心浏览器采用的是什么内核</p>
+<blockquote>
+<p>IE：Trident<br>Firefox：Geckos<br>Opera：Presto<br>Chrome：Webkit</p>
+</blockquote>
+<h3 id="特权域Xss的寻找：（本人才学过低，只能引用案例了，2333-）"><a href="#特权域Xss的寻找：（本人才学过低，只能引用案例了，2333-）" class="headerlink" title="特权域Xss的寻找：（本人才学过低，只能引用案例了，2333~）"></a>特权域Xss的寻找：（本人才学过低，只能引用案例了，2333~）</h3><p>在一番谷歌之后，找到篇简单易懂的文章：<a href="https://wooyun.js.org/drops/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8%EF%BC%88%E4%B8%80%EF%BC%89.html" target="_blank" rel="noopener">https://wooyun.js.org/drops/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AE%89%E5%85%A8%EF%BC%88%E4%B8%80%EF%BC%89.html</a><br>为了阅读方便，我是将这篇文章搬过来吧（有删改，仅搬动部分内容）~</p>
+<hr>
+<p>这是一个傲游的特权区域<br><img src="https://wooyun.js.org/images_result/images/2013101806150058565.jpeg" alt="img1"><br>我们首先得去确定这个页面是如何对网页进行抓取，抓取的过程是怎样的<br><img src="https://wooyun.js.org/images_result/images/2013101806150049631.jpeg" alt="img2"><br>通过进行点击 “加号” 弹出的页面观察（最近访问的页面），可以判定它对网页标题进行了抓取<br>换个思维，我们假设它并没有对title进行过滤，当我在标题里插入个alert，会不会造成Xss？</p>
+<pre><code>#!html
+&lt;title&gt;&lt;script&gt;alert(document.domain);&lt;/script&gt;&lt;/title&gt;
+</code></pre><p><img src="https://wooyun.js.org/images_result/images/2013101806150194626.jpeg" alt="img3"><br>成功弹窗！</p>
+<hr>
+<h2 id="如何造成命令执行？"><a href="#如何造成命令执行？" class="headerlink" title="如何造成命令执行？"></a>如何造成命令执行？</h2><p>对于这一点，本人才学浅薄，还是依旧引用文章吧，这里就不搬过来了，丢下链接自己去看吧~<br>乌云漏洞库（镜像站）：<a href="https://shuimugan.com/bug/view?bug_no=80158" target="_blank" rel="noopener">https://shuimugan.com/bug/view?bug_no=80158</a></p>
+<h2 id="个人总结"><a href="#个人总结" class="headerlink" title="个人总结"></a>个人总结</h2><p>特权域这种对我来说，只能是谈计算器系列，开个玩笑，23333~<br>浏览器这块的安全，不妨去看看这篇文章总结：<br><a href="https://www.cnblogs.com/sevck/p/7256789.html" target="_blank" rel="noopener">https://www.cnblogs.com/sevck/p/7256789.html</a></p>
     </div>
   </div>
   
+    <div class="copy-right">
+      <div class="markdown-body">
+        <blockquote>
+        
+        
+          本文作者 : 北极边界安全团队 <br>
+        
+        原文链接 : <a href>https://www.xn--djry88b.top/2019/04/25/浏览器特权域XSS/</a><br>
+        版权声明 : 本博客所有文章除特别声明外，均为原创性文章转载请注明出处！
+        </blockquote>
+      </div>
+    </div>
+  
+  
+  
+    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qzone, qq, weibo, wechat, douban, google, facebook, twitter">
+  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
+</div>
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
+  
 
-  <nav class="page-navigation">
+  
+    <div id="reward">
+  
+    <p id="reward-meta">微信 & 支付宝</p>
+  
+  <button id="reward-btn">
+    
+    <span>赞助我们</span>
+  </button>
+  <div id="reward-qrcode">
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4012833906,1014768283&fm=26&gp=0.jpg" alt="暂时找到二维码了~">
+        <p class="qrcode-meta">暂时找到二维码了~</p>
+      </div>
+    
+      <div class="reward-qrcode--container">
+        <img class="qrcode-img" src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4012833906,1014768283&fm=26&gp=0.jpg" alt="暂时找到二维码了~">
+        <p class="qrcode-meta">暂时找到二维码了~</p>
+      </div>
+    
+  </div>
+
+</div>
+
+<script>
+  (() => {
+    let button = document.querySelector('#reward-btn'),
+      qrcode = document.querySelector('#reward-qrcode'),
+      display = false;
+    
+    button.addEventListener('click', () => {
+      qrcode.style.display = display ? 'none' : 'block'
+      display = !display
+    }, false)
+  })()
+</script>
+  
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+      <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/官方/">
+              #官方
+            </a>
+          </span>
+          
+        
+      </span>
+    </div>
+    <div class="article-meta pull-right">
+    </div>
+  </div>
+</div>
+
+
+  <aside id="sidebar">
+    <p id="sidebar-header"></p>
+    <ol id="sidebar-toc"></ol>
+  </aside>
+  <script async>setTimeout(generateToc, 10);</script>
+
+
+  <nav class="post-navigation">
+    
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
+        <a href="/2019/04/24/关于团队/" target="_self">关于团队 · 亲~ 请务必进入阅读！</a>
+      </div>
     
     
   </nav>
+
+  
+    <a href="#comment" class="comment-anchor"></a>
+<div class="comment-title"><i class="iconfont icon-footprint"></i> 留下足迹 <i class="iconfont icon-footprint"></i></div>
+<div id="vcomments"></div>
+
+<script defer>
+  if( true ) {
+    let path = getRealPath()
+    new Valine({
+      el: "#vcomments",
+      appId: "3PseisT6QMg9IwHngJICl8nj-gzGzoHsz",
+      appKey: "UP2A4nujYyRfmEr33yMirlTV",
+      notify: false,
+      verify: false,
+      avatar: "robohash",
+      placeholder: "正确填写邮箱, 才能及时收到回复哦♪(^∇^*)",
+      path
+    });
+  }
+</script>
+   
 
   
     <script defer>
@@ -370,7 +424,7 @@ const valineAPI = (() => {
 })()
 
 const calcAndWriteTimes = () => {
-  let isPost = false;
+  let isPost = true;
 
   let timerAllDOM = document.querySelectorAll(".article-timer");
 
@@ -425,6 +479,7 @@ if(true){
 }
 </script>
    
+
 </div>
 
 
