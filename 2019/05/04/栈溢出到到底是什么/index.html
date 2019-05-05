@@ -8,12 +8,12 @@
   
   
   
-  <title>关于团队 · 亲~ 请务必进入阅读！ | 北极边界安全团队 | 聚网络文明之风，传文明网络之行！</title>
+  <title>栈溢出到到底是什么？（科普篇） | 北极边界安全团队 | 聚网络文明之风，传文明网络之行！</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="官方声明,官方,">
+    <meta name="keywords" content="系统安全,客户端安全,官方,栈溢出,">
   
   
   
@@ -181,18 +181,18 @@
 
 <div class="post">
   <h1 class="article-title">
-    <span>关于团队 · 亲~ 请务必进入阅读！</span>
+    <span>栈溢出到到底是什么？（科普篇）</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2019-04-24
+      2019-05-04
     </span>
     
       <span>
         分类 : 
-          <a href="/categories/官方声明/">
-            官方声明
+          <a href="/categories/系统安全/">
+            系统安全
           </a>
       </span>
     
@@ -203,9 +203,35 @@
   <div class="article-content">
     <div class="markdown-body">
       <p></p>
-<h2 id="关于团队"><a href="#关于团队" class="headerlink" title="关于团队"></a>关于团队</h2><blockquote>
-<p>团队名称：Arctic Shell [ 北极边界 ]<br>创建日期：2018-10-5<br>CTF小组 负责：P1KAJU （QQ：1340914307）<br>二进制小组 负责：JOE （QQ：2863686727）<br>WEB安全小组 负责：ZERO （QQ：2693132598）</p>
+<h3 id="作者信息"><a href="#作者信息" class="headerlink" title="作者信息"></a>作者信息</h3><blockquote>
+<p>本文作者：joe<br>审核：天析<br>团队：Arctic Shell</p>
 </blockquote>
+<h2 id="0x1：栈溢出学习基本要求"><a href="#0x1：栈溢出学习基本要求" class="headerlink" title="0x1：栈溢出学习基本要求"></a>0x1：栈溢出学习基本要求</h2><blockquote>
+<p>1.对汇编基础有一定的了解，以及相关的编程语言基础<br>2.有一颗好学的心</p>
+</blockquote>
+<h2 id="0x2：对于程序运行的了解"><a href="#0x2：对于程序运行的了解" class="headerlink" title="0x2：对于程序运行的了解"></a>0x2：对于程序运行的了解</h2><pre><code>寄存器和内存什么关系？必须通过寄存器才能和内存通讯吗？
+</code></pre><p>首先，我们要知道的是，寄存器是CPU里面的东西，而内存是在CPU外面的数据总线上，在计算机中的所有程序运行都是在内存中进行的！</p>
+<blockquote>
+<p>堆栈是内存中的一个数据结构，内存是CPU和硬盘之间的通道，寄存器是CPU的存储器。</p>
+</blockquote>
+<h3 id="虚拟地址"><a href="#虚拟地址" class="headerlink" title="虚拟地址"></a>虚拟地址</h3><p>即虚拟内存地址，程序使用的内存地址是虚拟地址，即程序运行在虚拟地址空间中。</p>
+<blockquote>
+<p>并不是所有的 “ 程序 ” 都是运行在虚拟地址中，CPU在启动时是运行在实模式，Bootloader 以及 内核 在初始化页表之前并不使用虚拟地址，而是直接使用物理地址的。</p>
+</blockquote>
+<h3 id="物理地址"><a href="#物理地址" class="headerlink" title="物理地址"></a>物理地址</h3><p>物理地址指实际存在的物理内存地址，访问该内存中的一个地址，那就需要对应的物理内存。</p>
+<h3 id="映射"><a href="#映射" class="headerlink" title="映射"></a>映射</h3><p>通过页表，进行一对一的映射</p>
+<h2 id="0x3：什么是栈溢出？"><a href="#0x3：什么是栈溢出？" class="headerlink" title="0x3：什么是栈溢出？"></a>0x3：什么是栈溢出？</h2><p>所谓溢出，就是超出了一个规定的范围,广义上就是超出范围，导致某些不好的事情发生。</p>
+<h3 id="什么是栈？"><a href="#什么是栈？" class="headerlink" title="什么是栈？"></a>什么是栈？</h3><p>栈又叫堆栈，你可以把它理解为一个盒子，进栈、出栈遵循先进后出的规则</p>
+<p><img src="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike92%2C5%2C5%2C92%2C30/sign=6d4c4094073b5bb5aada28ac57babe5c/a686c9177f3e67098c4504c03fc79f3df8dc5543.jpg" alt="img"></p>
+<h3 id="为什么会溢出？"><a href="#为什么会溢出？" class="headerlink" title="为什么会溢出？"></a>为什么会溢出？</h3><p>例（C语言）：<br>在C语言中没有内置的检查机制来确保复制到缓冲区的数据不得去大于缓冲区的大小，于是当我们这个数据足够大的时候，将会溢出缓冲区的范围之外，导致写到了不该写的地方。<br>也正是这样，让我们可以通过此方式去夺取一些敏感的权限。</p>
+<pre><code>int f(int x){int a[10];
+</code></pre><h3 id="什么项目容易出现？"><a href="#什么项目容易出现？" class="headerlink" title="什么项目容易出现？"></a>什么项目容易出现？</h3><blockquote>
+<p>越大的项目，溢出将会变得越来越难以避免！</p>
+</blockquote>
+<h2 id="0x4：相关漏洞（部分）"><a href="#0x4：相关漏洞（部分）" class="headerlink" title="0x4：相关漏洞（部分）"></a>0x4：相关漏洞（部分）</h2><blockquote>
+<p>···<br>CVE-2018-17916<br>CVE-2018-14829<br>CVE-2017-11882<br>CVE-2017-9430<br>CVE-2015-8651<br>CVE-2014-3100<br>CVE-2012-0158<br>CVE-2011-0104<br>CVE-2010-3333<br>CVE-2010-0188<br>CVE-2009-0927<br>CVE-2008-2992<br>CVE-2007-5659<br>···</p>
+</blockquote>
+<h2 id="0x5：总结"><a href="#0x5：总结" class="headerlink" title="0x5：总结"></a>0x5：总结</h2><p>由年份可以看出栈溢出的寻找无疑将会是困难的，但是一旦收获一个 “ 溢出 ” 漏洞，将会是你针对系统或者说客户端的最大的利器！</p>
     </div>
   </div>
   
@@ -216,7 +242,7 @@
         
           本文作者 : 北极边界安全团队 <br>
         
-        原文链接 : <a href>https://www.xn--djry88b.top/2019/04/24/关于团队/</a><br>
+        原文链接 : <a href>https://www.xn--djry88b.top/2019/05/04/栈溢出到到底是什么/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均为原创性文章转载请注明出处！
         </blockquote>
       </div>
@@ -276,6 +302,12 @@
             </a>
           </span>
           
+          <span class="span--tag">
+            <a href="/tags/栈溢出/">
+              #栈溢出
+            </a>
+          </span>
+          
         
       </span>
     </div>
@@ -294,12 +326,12 @@
 
   <nav class="post-navigation">
     
-    
-      <div class="nav-next">
-        下一篇:
+      <div class="nav-pre">
+        <i class="iconfont icon-prev"></i>
+        上一篇:
         <a href="/2019/04/25/浏览器特权域XSS/" target="_self">浏览器特权域XSS漏洞</a>
-        <i class="iconfont icon-next"></i>
       </div>
+    
     
   </nav>
 
