@@ -108,8 +108,8 @@ a.btn:hover {
 }
 .header .top-bar {
   position: relative;
-  padding-top: 15px;
-  padding-bottom: 120px;
+  padding-top: 10px;
+  padding-bottom: 30px;
 }
 .header .social {
   margin-bottom: 0;
@@ -170,7 +170,7 @@ a.btn:hover {
   margin-bottom: 30px;
 }
 .header .intro {
-  background: #00a5bb;
+  background: #000;
   padding-top: 90px;
   padding-bottom: 60px;
   position: relative;
